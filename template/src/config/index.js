@@ -7,7 +7,6 @@ let apiConf = {
   apiEnv: process && process.env ? (process.env.API_ENV || 'production') : 'production',
   appId: '',
   componentAppid: '',
-  vssKey: '', // 大数据key
   development: 'https://xx.com',
   test: 'https://xx.com',
   staging: 'https://xx.com',
@@ -22,9 +21,6 @@ export default {
   },
   get component_appid() {
     return apiConf.componentAppid;
-  },
-  get vssKey() {
-    return apiConf.vssKey;
   },
   get apiConf() {
     return {
