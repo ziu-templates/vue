@@ -1,0 +1,12 @@
+// media.css
+@import 'tool';
+
+$viewportBaseFontSize: (320px 21px), (360px 23px), (400px 25px) !default;
+
+@each $viewport in $viewportBaseFontSize {
+    @include responsive(nth($viewport ,1)){
+        html {
+            font-size:nth($viewport ,2);
+        }
+    }
+}

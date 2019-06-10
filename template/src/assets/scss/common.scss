@@ -1,0 +1,27 @@
+/*common*/
+@import 'tool';
+
+body {
+    background: #f4f4f4;
+}
+
+.flex {
+    display: flex;
+    display: -webkit-flex;
+}
+/*
+  省略
+    line-clamp ：1---文字显示1行
+*/
+.elli {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.elli-1 {
+    -webkit-line-clamp: 1;
+}
+.elli-2 {
+    -webkit-line-clamp: 2;
+}

@@ -1,0 +1,118 @@
+// global var
+$edge: 24;
+$fs_def: 22;
+// function list
+@mixin prefix($property, $value, $prefix_property:true){
+    $prefixes: webkit moz ;
+    @each $prefix in $prefixes {
+        @if $prefix_property{
+            #{'-' + $prefix + '-' + $property}: $value;
+        } @else {
+            #{$property} : #{'-' + $prefix + '-' + $value};
+        }
+    }
+    #{$property}: $value;
+}
+
+@mixin center($portrait:true){
+    position: absolute;
+    left: 50%;
+    @if $portrait{
+        top:50%;
+        -webkit-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    } @else {
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        transform: translate(-50%);
+    }
+
+}
+
+@mixin bgImage($img,$position:center,$size:100%){
+    background: url($img) no-repeat $position;
+    background-size: $size;
+}
+
+@mixin webkit($key, $num) {
+    #{$key}: #{$num};
+    -webkit-#{$key}: #{$num};
+}
+
+
+@mixin webkit_ele($key,$num){
+    #{$key}:#{$num};
+    -webkit-#{$key}:#{$num};
+    @content;
+}
+@mixin box-sizing{
+    @include webkit_ele(box-sizing,border-box);
+    @content;
+}
+@mixin to_center{
+    @include webkit_ele(transform,translate3d(-50%,-50%,0));
+    left:50%;
+    top:50%;
+    @content;
+}
+@mixin top_center{
+    @include webkit_ele(transform,translate3d(0,-50%,0));
+    top:50%;
+    @content;
+}
+@mixin left_center{
+    @include webkit_ele(transform,translate3d(-50%,0,0));
+    left:50%;
+    @content;
+}
+@mixin box_pack{
+    display:-webkit-box;
+    -webkit-box-pack:center;
+}
+@mixin box_align{
+    display:-webkit-box;
+    -webkit-box-align:center;
+}
+@mixin webkit_box{
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+}
+
+/*
+@mixin responsive($viewport,$orientation:portrait) {
+  @media only screen and (min-device-width: $viewport) and (orientation: $orientation) { @content; }
+}
+*/
+@mixin responsive($viewport) {
+    // @media only screen and (min-device-width: $viewport) and (max-aspect-ratio: 13/9) { @content; }
+    @media only screen and (min-device-width: $viewport) { @content; }
+}
+
+// $baseFontSize: 40 !default;
+@function rem($px) {
+    @if variable_exists('baseFontSize') {
+        @return $px/$baseFontSize + rem;
+    } @else {
+        @return $px/40 + rem;
+    }
+}
+
+@mixin animation($str) {
+    animation: #{$str};
+    -webkit-animation: #{$str};
+}
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
